@@ -17,85 +17,81 @@
 </head>
 
 <body>
-    <div class="login-bg"></div>
-    <div id="booking" class="section">
-        <div class="section-center">
-            <div class="container">
-                <div class="row">
-                    <div class="booking-form">
-                        <form id="registerForm">
-                            <div class="form-header">
-                                <h2>Register</h2>
-                            </div>
+    <div class="login-bg">
+        <div id="booking" class="section">
+            <div class="section-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="booking-form">
+                            <form id="registerForm">
+                                <div class="form-header">
+                                    <h2>Register</h2>
+                                </div>
 
-                            <!-- Username Field -->
-                            <div class="form-group">
-                                <input class="form-control" type="text" id="username" placeholder="Enter your Name"
-                                    required>
-                                <span class="form-label">Username</span>
-                            </div>
+                                <!-- Username Field -->
+                                <div class="form-group">
+                                    <input class="form-control" type="text" id="username" placeholder="Enter your Name"
+                                        required>
+                                    <span class="form-label">Username</span>
+                                </div>
 
-                            <!-- Email Field -->
-                            <div class="form-group">
-                                <input class="form-control" type="email" id="email" placeholder="Enter your Email"
-                                    required>
-                                <span class="form-label">Email</span>
-                            </div>
 
-                            <!-- Phone Number Field -->
-                            <div class="form-group">
-                                <input class="form-control" type="tel" id="phoneNumber"
-                                    placeholder="Enter your Phone Number" required>
-                                <span class="form-label">Phone</span>
-                            </div>
+                                <div class="form-group">
+                                    <input class="form-control" type="email" id="email" placeholder="Enter your Email"
+                                        required>
+                                    <span class="form-label">Email</span>
+                                </div>
 
-                            <!-- Country Field -->
-                            <div class="form-group">
-                                <select class="form-control" id="country" required>
-                                    <option value="" label="&nbsp;" selected hidden></option>
-                                    <option value="Egypt">Egypt</option>
-                                    <option value="KSA">Saudi Arabia</option>
-                                    <option value="USA">United States</option>
-                                    <option value="Canada">Canada</option>
-                                    <option value="Australia">Australia</option>
-                                </select>
-                                <span class="form-label">Country</span>
-                            </div>
+                                <div class="form-group">
+                                    <input class="form-control" type="tel" id="phoneNumber"
+                                        placeholder="Enter your Phone Number" required>
+                                    <span class="form-label">Phone</span>
+                                </div>
 
-                            <!-- Password Field -->
-                            <div class="form-group">
-                                <input class="form-control" type="password" id="password"
-                                    placeholder="Enter your Password" required>
-                                <span class="form-label">Password</span>
-                            </div>
+                                <div class="form-group">
+                                    <select class="form-control" id="country" required>
+                                        <option value="" label="&nbsp;" selected hidden></option>
+                                        <option value="Egypt">Egypt</option>
+                                        <option value="KSA">Saudi Arabia</option>
+                                        <option value="USA">United States</option>
+                                        <option value="Canada">Canada</option>
+                                        <option value="Australia">Australia</option>
+                                    </select>
+                                    <span class="form-label">Country</span>
+                                </div>
 
-                            <!-- Confirm Password Field -->
-                            <div class="form-group">
-                                <input class="form-control" type="password" id="confirmPassword"
-                                    placeholder="Confirm your Password" required>
-                                <span class="form-label">Confirm Password</span>
-                            </div>
 
-                            <!-- Submit Button -->
-                            <div class="form-btn">
-                                <button class="submit-btn" type="button" id="registerButton">Register</button>
-                            </div>
+                                <div class="form-group">
+                                    <input class="form-control" type="password" id="password"
+                                        placeholder="Enter your Password" required>
+                                    <span class="form-label">Password</span>
+                                </div>
 
-                            <!-- Link to Login Page -->
-                            <div class="register-link">
-                                <p style="color: aliceblue;">
-                                    Already have an account?
-                                    <a href="login.html" style="color: azure;">Login here</a>
-                                </p>
-                            </div>
-                            <div id="messageBox" style="margin-top: 20px; color: red; font-weight: bold;"></div>
-                        </form>
+
+                                <div class="form-group">
+                                    <input class="form-control" type="password" id="confirmPassword"
+                                        placeholder="Confirm your Password" required>
+                                    <span class="form-label">Confirm Password</span>
+                                </div>
+
+                                <div class="form-btn">
+                                    <button class="submit-btn" type="button" id="registerButton">Register</button>
+                                </div>
+
+                                <div class="register-link">
+                                    <p style="color: aliceblue;">
+                                        Already have an account?
+                                        <a href="login.html" style="color: azure;">Login here</a>
+                                    </p>
+                                </div>
+                                <div id="messageBox" style="margin-top: 20px; color: red; font-weight: bold;"></div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
     <script src="js/register.js"></script>
 
     <script src="js/jquery.min.js"></script>
@@ -118,6 +114,6 @@
         }
     </script>
 
-</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</body>
 
 </html>

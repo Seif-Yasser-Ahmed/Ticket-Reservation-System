@@ -34,7 +34,7 @@
 	background-image: url(../img/lexi-anderson-G8wPrJyNqWQ-unsplash.jpg);
 	background-size: cover;
 	background-position: center;
-	background-repeat: no-repeat;
+	background-repeat: repeat;
 }
 
 .booking-bg-bus {
@@ -46,7 +46,7 @@
 	background-image: url(../img/bus.jpg);
 	background-size: cover;
 	background-position: center;
-	background-repeat: no-repeat;
+	background-repeat: repeat;
 }
 
 .login-bg {
@@ -55,10 +55,22 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
+	height: 100%;
 	background-image: url(../img/Transport-bg.png);
-	background-size: cover;
+
 	background-position: center;
-	background-repeat: no-repeat;
+
+	background-repeat: repeat;
+}
+
+.background_img {
+	position: relative;
+	height: 100%;
+	background-image: url(../img/Transport-bg.png);
+
+	background-position: center;
+
+	background-repeat: repeat;
 }
 
 

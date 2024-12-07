@@ -3,43 +3,19 @@ const path = require('path');
 
 document.getElementById('registerButton').addEventListener('click', (event) => {
     event.preventDefault();
-    const username = document.getElementById('username').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const phoneNumber = document.getElementById('phoneNumber').value.trim();
-    const country = document.getElementById('country').value;
-    const password = document.getElementById('password').value;
-    const confirmPassword = document.getElementById('confirmPassword').value;
+    const pickup = document.getElementById('pickup').value.trim();
+    const destination = document.getElementById('destination').value.trim();
+    const tickets = document.getElementById('tickets').value;
 
     const messageBox = document.getElementById('messageBox');
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const phoneRegex = /^[0-9]{10,}$/;
-    if (!username || !email || !phoneNumber || !country || !password) {
+    if (!pickup || !destination || !tickets) {
         messageBox.textContent = 'All fields are required!';
         return;
     }
 
-    if (!emailRegex.test(email)) {
-        messageBox.textContent = 'Please enter a valid email address!';
-        return;
-    }
 
-    if (!phoneRegex.test(phoneNumber)) {
-        messageBox.textContent = 'Phone number must be at least 10 digits and contain only numbers!';
-        return;
-    }
-
-    if (password.length < 4) {
-        messageBox.textContent = 'Password must be at least 4 characters long!';
-        return;
-    }
-
-    if (password !== confirmPassword) {
-        messageBox.textContent = 'Passwords do not match!';
-        return;
-    }
-
-    const filePath = path.join(__dirname, '.', 'data', 'user.csv');
+    const filePath = path.join(__dirname, '.', 'data', 'TrainReservation.csv');
 
     fs.readFile(filePath, 'utf8', (err, data) => {
         if (err && err.code !== 'ENOENT') {
@@ -60,8 +36,10 @@ document.getElementById('registerButton').addEventListener('click', (event) => {
                 return;
             }
         }
-
-        const csvRow = `${username},${password},${email},${phoneNumber},${country}\n`;
+        const PassengerName = 'testUser';
+        const PassengerNumber = '0100000';
+        // const testCountry = 'TestCountry';
+        const csvRow = `${PassengerName},${PassengerNumber},${pickup},${destination},${tickets}\n`;
 
         const contentToWrite = data && !data.endsWith('\n') ? `\n${csvRow}` : csvRow;
 
@@ -88,11 +66,4 @@ function clearForm() {
     document.getElementById('country').value = '';
     document.getElementById('password').value = '';
     document.getElementById('confirmPassword').value = '';
-}
-function getUsername() {
-    return document.getElementById('username').value.trim();
-}
-
-function getPhoneNumber() {
-    return document.getElementById('phoneNumber').value.trim();
 }
