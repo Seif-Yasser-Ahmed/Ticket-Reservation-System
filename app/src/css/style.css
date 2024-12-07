@@ -99,7 +99,7 @@
 	font-weight: 700;
 	-webkit-box-shadow: none;
 	box-shadow: none;
-	text-transform: capitalize;
+	/* text-transform: capitalize; */
 	border-bottom: 2px solid #cecccd;
 }
 
@@ -226,6 +226,7 @@
 	.booking-form>.booking-bg {
 		display: none;
 	}
+
 	.booking-form>form {
 		margin-left: 0px;
 	}
