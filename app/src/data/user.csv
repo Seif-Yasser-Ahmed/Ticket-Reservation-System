@@ -1,4 +1,2 @@
-username, password, email, phoneNumber, country, FlightID, TrainID, BusID
+username, password, email, phoneNumber, country
 Abc,1234,a@email.com,a,USA
-AhmedNezar,3011,ahmednezarrr@gmail.com,01552290506,USA
-Seif,1234,seif@gmail.com,0109055583,Egypt

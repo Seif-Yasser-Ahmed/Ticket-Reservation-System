@@ -28,7 +28,18 @@ document.getElementById('loginButton').addEventListener('click', (event) => {
             return csvUsername === username && csvPassword === password;
         });
 
+        
         if (userFound) {
+            const user_data = rows.find((row) => {
+                const [csvUsername, csvPassword] = row.split(',');
+                if (csvUsername === username && csvPassword === password) {
+                    return row;
+                }
+            });
+    
+            const user_data_json = JSON.stringify(user_data);
+            fs.writeFileSync(path.join(__dirname, '.', 'data', 'user_data.json'), user_data_json);
+
             messageBox.style.color = 'green';
             messageBox.textContent = 'Login successful!';
             setTimeout(() => {

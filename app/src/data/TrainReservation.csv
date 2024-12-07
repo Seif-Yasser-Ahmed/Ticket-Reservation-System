@@ -1,2 +1,2 @@
-PassengerName,PassengerNumber,From,To,NoOfTickets,PickupDate,PickupTime
-testUser,0100000,ffff,fffffff,KSA
+PassengerName,PassengerNumber,TrainID,Source,Destination,Tickets,Date
+

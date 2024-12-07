@@ -89,10 +89,3 @@ function clearForm() {
     document.getElementById('password').value = '';
     document.getElementById('confirmPassword').value = '';
 }
-function getUsername() {
-    return document.getElementById('username').value.trim();
-}
-
-function getPhoneNumber() {
-    return document.getElementById('phoneNumber').value.trim();
-}
