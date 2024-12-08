@@ -6,13 +6,13 @@ document.getElementById('registerButton').addEventListener('click', (event) => {
     const pickup = document.getElementById('departure').value.trim();
     const destination = document.getElementById('destination').value.trim();
     const tickets = document.getElementById('tickets').value;
-    const train_number = document.getElementById('train').value;
+    const Bus_number = document.getElementById('Bus').value;
     const pickupdate = document.getElementById('pickupdate').value;
 
 
     const messageBox = document.getElementById('messageBox');
 
-    if (!pickup || !destination || !tickets || !train_number || !pickupdate) {
+    if (!pickup || !destination || !tickets || !Bus_number || !pickupdate) {
         messageBox.textContent = 'All fields are required!';
         messageBox.style.color = 'red';
         return;
@@ -24,23 +24,23 @@ document.getElementById('registerButton').addEventListener('click', (event) => {
         return;
     }
 
-    trains_file = fs.readFileSync(path.join(__dirname, '.', 'data', 'trains.csv'), 'utf8').split('\n');
-    for (let i = 1; i < trains_file.length; i++) {
-        const columns = trains_file[i].split(',');
-        if (columns[0] === train_number) {
+    Buss_file = fs.readFileSync(path.join(__dirname, '.', 'data', 'Buss.csv'), 'utf8').split('\n');
+    for (let i = 1; i < Buss_file.length; i++) {
+        const columns = Buss_file[i].split(',');
+        if (columns[0] === Bus_number) {
             if (parseInt(columns[5]) < tickets) {
                 messageBox.textContent = 'Not enough tickets available!';
                 return;
             }
             columns[5] = parseInt(columns[5]) - tickets;
-            trains_file[i] = columns.join(',');
+            Buss_file[i] = columns.join(',');
             break;
         }
     }
 
 
 
-    const filePath = path.join(__dirname, '.', 'data', 'TrainReservation.csv');
+    const filePath = path.join(__dirname, '.', 'data', 'BusReservation.csv');
 
     const user_data = fs.readFileSync(path.join(__dirname, '.', 'data', 'user_data.json'));
     const user_data_json = JSON.parse(user_data);
@@ -60,22 +60,23 @@ document.getElementById('registerButton').addEventListener('click', (event) => {
                 const values = row.split(',');
                 existingUsername = values[0];
                 existingDate = values[6];
-
+                // console.log(typeof pickupdate);
+                // console.log(typeof existingDate);
                 return (existingUsername === username && existingDate === pickupdate);
             });
 
             if (userExists) {
-                messageBox.textContent = "You can't book multiple trains at the same time";
+                messageBox.textContent = "You can't book multiple Buss at the same time";
                 messageBox.style.color = 'red';
                 return;
             }
         }
 
-        fs.writeFileSync(path.join(__dirname, '.', 'data', 'trains.csv'), trains_file.join('\n'));
+        fs.writeFileSync(path.join(__dirname, '.', 'data', 'Buss.csv'), Buss_file.join('\n'));
 
         const PassengerName = username;
         const PassengerNumber = phoneNumber;
-        const csvRow = `${PassengerName},${PassengerNumber},${train_number},${pickup},${destination},${tickets},${pickupdate}\n`;
+        const csvRow = `${PassengerName},${PassengerNumber},${Bus_number},${pickup},${destination},${tickets},${pickupdate}\n`;
 
         const contentToWrite = data && !data.endsWith('\n') ? `\n${csvRow}` : csvRow;
 
@@ -92,7 +93,7 @@ document.getElementById('registerButton').addEventListener('click', (event) => {
     });
 });
 
-document.getElementById('searchTrains').addEventListener('click', (event) => {
+document.getElementById('searchBuss').addEventListener('click', (event) => {
     event.preventDefault();
     const departure = document.getElementById('departure').value.trim();
     const destination = document.getElementById('destination').value.trim();
@@ -100,48 +101,45 @@ document.getElementById('searchTrains').addEventListener('click', (event) => {
 
     const messageBox = document.getElementById('messageBox');
 
-    let train_data = fs.readFileSync(path.join(__dirname, '.', 'data', 'trains.csv'), 'utf8').split('\n');
+    let Bus_data = fs.readFileSync(path.join(__dirname, '.', 'data', 'Buss.csv'), 'utf8').split('\n');
 
-    let availableTrains = [];
+    let availableBuss = [];
 
     if (!departure || !destination) {
         messageBox.textContent = 'Departure and Destination are required!';
         return;
     }
-
-    for (let i = 1; i < train_data.length; i++) {
-        const columns = train_data[i].split(',');
+    for (let i = 1; i < Bus_data.length; i++) {
+        const columns = Bus_data[i].split(',');
         csvDeparture = columns[1];
         csvDestination = columns[2];
         if (csvDeparture === departure && csvDestination === destination) {
-            availableTrains.push(train_data[i]);
+            availableBuss.push(Bus_data[i]);
         }
     }
+    const Busselector = document.getElementById('Bus');
+    const BusSelectionDiv = document.getElementById('BusSelection');
 
+    Busselector.innerHTML = '';
+    BusSelectionDiv.style.display = 'none';
 
-    const trainselector = document.getElementById('train');
-    const trainSelectionDiv = document.getElementById('trainSelection');
+    if (Array.isArray(availableBuss) && availableBuss.length > 0) {
+        availableBuss.forEach((Bus) => {
+            const [BusNumber, departure, destination, departureTime, price, seats] = Bus.split(',');
 
+            const BusOption = document.createElement('option');
+            BusOption.value = BusNumber;
+            BusOption.textContent = `${BusNumber} - ${departure} to ${destination} - at ${departureTime} - Price: $${price} | Remaining Seats: ${seats}`;
 
-    trainselector.innerHTML = '';
-    trainSelectionDiv.style.display = 'none';
-
-    if (Array.isArray(availableTrains) && availableTrains.length > 0) {
-        availableTrains.forEach((train) => {
-            const [trainNumber, departure, destination, departureTime, price, seats] = train.split(',');
-
-            const trainOption = document.createElement('option');
-            trainOption.value = trainNumber;
-            trainOption.textContent = `${trainNumber} - ${departure} to ${destination} - at ${departureTime} - Price: $${price} | Remaining Seats: ${seats}`;
-
-            trainselector.appendChild(trainOption);
+            Busselector.appendChild(BusOption);
         });
 
-        trainSelectionDiv.style.display = 'block';
-        messageBox.textContent = 'Trains available!';
+        BusSelectionDiv.style.display = 'block';
+
+        messageBox.textContent = 'Buss available!';
         messageBox.style.color = 'green';
     } else {
-        messageBox.textContent = 'No trains available for the selected route.';
+        messageBox.textContent = 'No Buss available for the selected route.';
         messageBox.style.color = 'red';
     }
 });
@@ -151,6 +149,7 @@ function clearForm() {
     document.getElementById('destination').value = '';
     document.getElementById('tickets').value = '';
     document.getElementById('pickupdate').value = '';
-    // messageBox.style.display = 'none';
-    document.getElementById('trainSelection').style.display = 'None';
+    // document.getElementById('BusSelection').value = '';
+    document.getElementById('BusSelection').style.display = 'None';
+
 }

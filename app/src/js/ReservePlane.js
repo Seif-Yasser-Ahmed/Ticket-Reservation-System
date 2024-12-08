@@ -6,13 +6,13 @@ document.getElementById('registerButton').addEventListener('click', (event) => {
     const pickup = document.getElementById('departure').value.trim();
     const destination = document.getElementById('destination').value.trim();
     const tickets = document.getElementById('tickets').value;
-    const train_number = document.getElementById('train').value;
+    const Plane_number = document.getElementById('Plane').value;
     const pickupdate = document.getElementById('pickupdate').value;
 
 
     const messageBox = document.getElementById('messageBox');
 
-    if (!pickup || !destination || !tickets || !train_number || !pickupdate) {
+    if (!pickup || !destination || !tickets || !Plane_number || !pickupdate) {
         messageBox.textContent = 'All fields are required!';
         messageBox.style.color = 'red';
         return;
@@ -24,23 +24,23 @@ document.getElementById('registerButton').addEventListener('click', (event) => {
         return;
     }
 
-    trains_file = fs.readFileSync(path.join(__dirname, '.', 'data', 'trains.csv'), 'utf8').split('\n');
-    for (let i = 1; i < trains_file.length; i++) {
-        const columns = trains_file[i].split(',');
-        if (columns[0] === train_number) {
+    Planes_file = fs.readFileSync(path.join(__dirname, '.', 'data', 'Planes.csv'), 'utf8').split('\n');
+    for (let i = 1; i < Planes_file.length; i++) {
+        const columns = Planes_file[i].split(',');
+        if (columns[0] === Plane_number) {
             if (parseInt(columns[5]) < tickets) {
                 messageBox.textContent = 'Not enough tickets available!';
                 return;
             }
             columns[5] = parseInt(columns[5]) - tickets;
-            trains_file[i] = columns.join(',');
+            Planes_file[i] = columns.join(',');
             break;
         }
     }
 
 
 
-    const filePath = path.join(__dirname, '.', 'data', 'TrainReservation.csv');
+    const filePath = path.join(__dirname, '.', 'data', 'FlightsReservation.csv');
 
     const user_data = fs.readFileSync(path.join(__dirname, '.', 'data', 'user_data.json'));
     const user_data_json = JSON.parse(user_data);
@@ -65,17 +65,17 @@ document.getElementById('registerButton').addEventListener('click', (event) => {
             });
 
             if (userExists) {
-                messageBox.textContent = "You can't book multiple trains at the same time";
+                messageBox.textContent = "You can't book multiple Planes at the same time";
                 messageBox.style.color = 'red';
                 return;
             }
         }
 
-        fs.writeFileSync(path.join(__dirname, '.', 'data', 'trains.csv'), trains_file.join('\n'));
+        fs.writeFileSync(path.join(__dirname, '.', 'data', 'Planes.csv'), Planes_file.join('\n'));
 
         const PassengerName = username;
         const PassengerNumber = phoneNumber;
-        const csvRow = `${PassengerName},${PassengerNumber},${train_number},${pickup},${destination},${tickets},${pickupdate}\n`;
+        const csvRow = `${PassengerName},${PassengerNumber},${Plane_number},${pickup},${destination},${tickets},${pickupdate}\n`;
 
         const contentToWrite = data && !data.endsWith('\n') ? `\n${csvRow}` : csvRow;
 
@@ -92,7 +92,7 @@ document.getElementById('registerButton').addEventListener('click', (event) => {
     });
 });
 
-document.getElementById('searchTrains').addEventListener('click', (event) => {
+document.getElementById('searchPlanes').addEventListener('click', (event) => {
     event.preventDefault();
     const departure = document.getElementById('departure').value.trim();
     const destination = document.getElementById('destination').value.trim();
@@ -100,48 +100,48 @@ document.getElementById('searchTrains').addEventListener('click', (event) => {
 
     const messageBox = document.getElementById('messageBox');
 
-    let train_data = fs.readFileSync(path.join(__dirname, '.', 'data', 'trains.csv'), 'utf8').split('\n');
+    let Plane_data = fs.readFileSync(path.join(__dirname, '.', 'data', 'Planes.csv'), 'utf8').split('\n');
 
-    let availableTrains = [];
+    let availablePlanes = [];
 
     if (!departure || !destination) {
         messageBox.textContent = 'Departure and Destination are required!';
         return;
     }
 
-    for (let i = 1; i < train_data.length; i++) {
-        const columns = train_data[i].split(',');
+    for (let i = 1; i < Plane_data.length; i++) {
+        const columns = Plane_data[i].split(',');
         csvDeparture = columns[1];
         csvDestination = columns[2];
         if (csvDeparture === departure && csvDestination === destination) {
-            availableTrains.push(train_data[i]);
+            availablePlanes.push(Plane_data[i]);
         }
     }
 
 
-    const trainselector = document.getElementById('train');
-    const trainSelectionDiv = document.getElementById('trainSelection');
+    const Planeselector = document.getElementById('Plane');
+    const PlaneSelectionDiv = document.getElementById('PlaneSelection');
 
 
-    trainselector.innerHTML = '';
-    trainSelectionDiv.style.display = 'none';
+    Planeselector.innerHTML = '';
+    PlaneSelectionDiv.style.display = 'none';
 
-    if (Array.isArray(availableTrains) && availableTrains.length > 0) {
-        availableTrains.forEach((train) => {
-            const [trainNumber, departure, destination, departureTime, price, seats] = train.split(',');
+    if (Array.isArray(availablePlanes) && availablePlanes.length > 0) {
+        availablePlanes.forEach((Plane) => {
+            const [PlaneNumber, departure, destination, departureTime, price, seats] = Plane.split(',');
 
-            const trainOption = document.createElement('option');
-            trainOption.value = trainNumber;
-            trainOption.textContent = `${trainNumber} - ${departure} to ${destination} - at ${departureTime} - Price: $${price} | Remaining Seats: ${seats}`;
+            const PlaneOption = document.createElement('option');
+            PlaneOption.value = PlaneNumber;
+            PlaneOption.textContent = `${PlaneNumber} - ${departure} to ${destination} - at ${departureTime} - Price: $${price} | Remaining Seats: ${seats}`;
 
-            trainselector.appendChild(trainOption);
+            Planeselector.appendChild(PlaneOption);
         });
 
-        trainSelectionDiv.style.display = 'block';
-        messageBox.textContent = 'Trains available!';
+        PlaneSelectionDiv.style.display = 'block';
+        messageBox.textContent = 'Planes available!';
         messageBox.style.color = 'green';
     } else {
-        messageBox.textContent = 'No trains available for the selected route.';
+        messageBox.textContent = 'No Planes available for the selected route.';
         messageBox.style.color = 'red';
     }
 });
@@ -152,5 +152,5 @@ function clearForm() {
     document.getElementById('tickets').value = '';
     document.getElementById('pickupdate').value = '';
     // messageBox.style.display = 'none';
-    document.getElementById('trainSelection').style.display = 'None';
+    document.getElementById('PlaneSelection').style.display = 'None';
 }
