@@ -25,10 +25,10 @@
 						<div class="booking-form">
 							<form id="registerForm">
 								<div class="form-header">
-									<h2>Book Plane</h2>
+									<h2 id="type">Book Plane</h2>
 								</div>
 								<div>
-									<button class="submit-btn" id="searchPlanes">Search</button>
+									<button class="submit-btn" id="searchPlane">Search</button>
 									<!-- Plane Selection -->
 								</div>
 								<!-- Source Selection -->
@@ -72,19 +72,13 @@
 											<span class="form-label">Pickup Date</span>
 										</div>
 									</div>
-									<!-- <div class="col-md-6">
-										<div class="form-group">
-											<input class="form-control" type="time" required id="pickuptime">
-											<span class="form-label">Pickup Time</span>
-										</div>
-									</div> -->
 								</div>
 								<div class="form-btn">
-									<button class="submit-btn" type="button" id="registerButton">Book Now</button>
+									<button class="submit-btn" type="button" id="registerButtonPlane">Book Now</button>
 								</div>
 								<div class="form-btn">
 									<button class="submit-btn"
-										onclick="navigateTo('reservation_Menu.html')">Back</button>
+										onclick="window.location.href='reservation_Menu.html'">Back</button>
 								</div>
 								<div id="messageBox" style="margin-top: 20px; color: red; font-weight: bold;"></div>
 
@@ -95,73 +89,7 @@
 			</div>
 		</div>
 	</div>
-	<script src="js/ReservePlane.js"></script>
-	<!-- <script src="js/login.js"></script> -->
-
-	<script src="js/jquery.min.js"></script>
-	<script>
-		$('.form-control').each(function () {
-			floatedLabel($(this));
-		});
-
-		$('.form-control').on('input', function () {
-			floatedLabel($(this));
-		});
-
-		function floatedLabel(input) {
-			var $field = input.closest('.form-group');
-			if (input.val()) {
-				$field.addClass('input-not-empty');
-			} else {
-				$field.removeClass('input-not-empty');
-			}
-		}
-	</script>
-
-</body>
-
-</html>
-
-<script src="js/jquery.min.js"></script>
-<script src="js/ReservePlane.js"></script>
-<script>
-	$('.form-control').each(function () {
-		floatedLabel($(this));
-	});
-
-	$('.form-control').on('input', function () {
-		floatedLabel($(this));
-	});
-
-	function floatedLabel(input) {
-		var $field = input.closest('.form-group');
-		if (input.val()) {
-			$field.addClass('input-not-empty');
-		} else {
-			$field.removeClass('input-not-empty');
-		}
-	}
-	function navigateTo(page) {
-		window.location.href = page;
-	}
-	$('.form-control').each(function () {
-		floatedLabel($(this));
-	});
-
-	$('.form-control').on('input', function () {
-		floatedLabel($(this));
-	});
-
-	function floatedLabel(input) {
-		var $field = input.closest('.form-group');
-		if (input.val()) {
-			$field.addClass('input-not-empty');
-		} else {
-			$field.removeClass('input-not-empty');
-		}
-	}
-</script>
-
+	<script src="js/ReserveTransportation.js"></script>
 </body>
 
 </html>
