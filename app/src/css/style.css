@@ -243,3 +243,17 @@
 		margin-left: 0px;
 	}
 }
+
+.headers {
+	color: #ffc600;
+}
+
+#history {
+	background-color: rgba(255, 255, 255, 0.3);
+	;
+	color: #ffc600;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}

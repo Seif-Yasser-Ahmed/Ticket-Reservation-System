@@ -1,10 +1,10 @@
 TrainID,Source,Destination,Departure,Price,Seats
-T01,Cairo,Alexandria,08:00,200,100
+T01,Cairo,Alexandria,08:00,200,96
 T02,Cairo,Alexandria,10:00,100,100
 T03,Cairo,Alexandria,12:00,150,100
 T04,Alexandria,Cairo,08:00,200,100
 T05,Alexandria,Cairo,10:00,100,100
-T06,Alexandria,Cairo,12:00,150,100
+T06,Alexandria,Cairo,12:00,150,94
 T07,Cairo,Luxor,08:00,200,100
 T08,Cairo,Luxor,10:00,100,100
 T09,Cairo,Luxor,12:00,150,100

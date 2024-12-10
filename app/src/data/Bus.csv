@@ -1,5 +1,5 @@
 BusID,Source,Destination,Departure,Price,Seats
-B01,Cairo,Alexandria,08:00,200,100
+B01,Cairo,Alexandria,08:00,200,99
 B02,Cairo,Alexandria,10:00,100,100
 B03,Cairo,Alexandria,12:00,150,100
 B04,Alexandria,Cairo,08:00,200,100

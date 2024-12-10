@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Ticket Reservation System</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
+
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
+
+    <link type="text/css" rel="stylesheet" href="css/style.css" />
+
+
+</head>
+
+<body>
+    <div class="login-bg"></div>
+    <div id="booking" class="section">
+        <div class="section-center">
+            <div class="container">
+                <div class="row">
+                    <div class="booking-form">
+                        <!-- <form> -->
+                        <div class="form-header">
+                            <h2 id="type">Reservation History</h2>
+                        </div>
+
+                        <table class="table table-bordered" style="border: 2px solid #ffc600; color: white;">
+                            <thead>
+                                <tr class="headers">
+                                    <th>Transport. Type</th>
+                                    <th>ID</th>
+                                    <th>Departure</th>
+                                    <th>Destination</th>
+                                    <th>Date</th>
+                                    <!-- <th>Time</th> -->
+                                    <th>Seats</th>
+                                </tr>
+                            </thead>
+                            <tbody id="historyTableBody">
+                                <!-- Rows will be dynamically added here -->
+                            </tbody>
+                        </table>
+
+                        <div class="form-btn" style="margin-top: 15px;">
+                            <button class="submit-btn" type="button"
+                                onclick="window.location.href='reservation_Menu.html'">Back</button>
+                        </div>
+                    </div>
+                    <!-- </form> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script src="js/history.js"></script>
+    <!-- <script src="js/jquery.min.js"></script> -->
+
+
+
+</body>
+
+</html>

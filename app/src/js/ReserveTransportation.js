@@ -28,9 +28,9 @@ function writeReservation(type, reservationData) {
     fs.appendFile(filePath, reservationData, (err) => {
         if (err) {
             console.error(`Error saving reservation for ${type}:`, err);
-            displayMessage(`Failed to register. Please try again for ${type}.`, 'red');
+            displayMessage(`Failed to reserve. Please try again for ${type}.`, 'red');
         } else {
-            displayMessage(`${type} registration successful!`, 'green');
+            displayMessage(`${type} reservation successful!`, 'green');
             clearForm();
         }
     });
@@ -144,3 +144,38 @@ document.getElementById(`search${type}`).addEventListener('click', handleSearchC
 
 
 loadAppState(type);
+
+
+
+function loadAllUserReservations() {
+    const reservationTypes = ['Bus', 'Train', 'Plane']; // Add other types if needed
+    const historyTableBody = document.getElementById('historyTableBody');
+    historyTableBody.innerHTML = '';
+
+    reservationTypes.forEach((reservationType) => {
+        const reservationFilePath = path.join(__dirname, '.', 'data', `${reservationType}Reservation.csv`);
+        if (fs.existsSync(reservationFilePath)) {
+            const reservations = fs.readFileSync(reservationFilePath, 'utf8').split('\n').filter(line => line);
+            const userReservations = reservations.filter(reservation => reservation.split(',')[0] === appState.user.username);
+
+            userReservations.forEach(reservation => {
+                const [username, phoneNumber, number, pickup, destination, tickets, date] = reservation.split(',');
+                // PassengerName,PassengerNumber,BusID,Source,Destination,Tickets,Date
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${reservationType}</td>
+                    <td>${number}</td>
+                    <td>${pickup}</td>
+                    <td>${destination}</td>
+                    <td>${date}</td>
+                    <td>${tickets}</td>
+                `;
+                historyTableBody.appendChild(row);
+            });
+        }
+    });
+}
+
+// loadAllUserReservations();
+
+// loadUserReservations();
